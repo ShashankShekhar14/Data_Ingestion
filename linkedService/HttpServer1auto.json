@@ -1,0 +1,19 @@
+{
+	"name": "HttpServer1auto",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "HttpServer",
+		"typeProperties": {
+			"url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Anonymous",
+			"authHeaders": {
+				"User-Agent": {
+					"type": "SecureString",
+					"value": "**********"
+				}
+			}
+		}
+	}
+}

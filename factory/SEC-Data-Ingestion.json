@@ -1,0 +1,9 @@
+{
+	"name": "SEC-Data-Ingestion",
+	"location": "southindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "9d23b6e3-4cd4-44a1-a089-6b8b557d894a",
+		"tenantId": "df4e6cc4-a203-4e5a-a33a-41e92bc9d6c5"
+	}
+}

@@ -1,0 +1,89 @@
+{
+	"name": "pipeline1",
+	"properties": {
+		"activities": [
+			{
+				"name": "ForEach1",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "Set variable2",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@range(pipeline().parameters.startYear, add(sub(pipeline().parameters.endYear, pipeline().parameters.startYear), 1))",
+						"type": "Expression"
+					},
+					"isSequential": true,
+					"activities": [
+						{
+							"name": "Execute Pipeline1",
+							"type": "ExecutePipeline",
+							"dependsOn": [],
+							"policy": {
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"pipeline": {
+									"referenceName": "pipeline2",
+									"type": "PipelineReference"
+								},
+								"waitOnCompletion": true,
+								"parameters": {
+									"yearList": {
+										"value": "@item()",
+										"type": "Expression"
+									}
+								}
+							}
+						}
+					]
+				}
+			},
+			{
+				"name": "Set variable2",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "yearList",
+					"value": {
+						"value": "@range(pipeline().parameters.startYear, add(pipeline().parameters.endYear,1))",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"startYear": {
+				"type": "int",
+				"defaultValue": 2024
+			},
+			"endYear": {
+				"type": "int",
+				"defaultValue": 2025
+			}
+		},
+		"variables": {
+			"yearList": {
+				"type": "Array"
+			},
+			"quarterArray": {
+				"type": "Array"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2025-06-07T12:15:45Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
